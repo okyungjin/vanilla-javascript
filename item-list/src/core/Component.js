@@ -25,4 +25,13 @@ export default class Component {
     this.$state = { ...this.$state, ...newState };
     this.render();
   }
+
+  addEvent(eventType, selector, callback) {
+    const children = [...this.$target.querySelectorAll(selector)];
+    const isTargetExist = (target) => children.includes(target) || target.closest(selector);
+    this.$target.addEventListener(eventType, event => {
+      if (!isTargetExist(event.target)) return;
+      callback(event);
+    });
+  }
 }

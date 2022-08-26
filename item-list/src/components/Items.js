@@ -23,18 +23,16 @@ export default class ItemList extends Component {
   }
 
   setEvent() {
-    this.$target.addEventListener('click', ({ target }) => {
-      const items = [...this.$state.items];
+    this.addEvent('click', '.add-btn', () => {
+      const { items } =  this.$state;
+      this.setState({ items: [...items, `item ${items.length + 1}`] });
+    });
 
-      if (target.classList.contains('add-btn')) {
-        this.setState({ items: [...items, `item ${items.length + 1}`] });
-      }
-
-      if (target.classList.contains('delete-btn')) {
-        const index = parseInt(target.dataset.index);
-        items.splice(index, 1);
-        this.setState({ items });
-      }
+    this.addEvent('click', '.delete-btn', ({ target }) => {
+      const items =  [...this.$state.items];
+      const index = parseInt(target.dataset.index);
+      items.splice(index, 1);
+      this.setState({ items });
     });
   }
 }
