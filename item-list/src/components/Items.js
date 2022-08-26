@@ -23,22 +23,18 @@ export default class ItemList extends Component {
   }
 
   setEvent() {
-    this.$target
-      .querySelector('.add-btn')
-      .addEventListener('click', () => {
-        const { items } =  this.$state;
-        this.setState({ items: [...items, `item ${items.length + 1}`] });
-      });
+    this.$target.addEventListener('click', ({ target }) => {
+      const items = [...this.$state.items];
 
-    this.$target
-      .querySelectorAll('.delete-btn')
-      .forEach(deleteBtn => {
-        deleteBtn.addEventListener('click', ({ target }) => {
-          const items =  [...this.$state.items];
-          const index = parseInt(target.dataset.index);
-          items.splice(index, 1);
-          this.setState({ items });
-        });
-      });
+      if (target.classList.contains('add-btn')) {
+        this.setState({ items: [...items, `item ${items.length + 1}`] });
+      }
+
+      if (target.classList.contains('delete-btn')) {
+        const index = parseInt(target.dataset.index);
+        items.splice(index, 1);
+        this.setState({ items });
+      }
+    });
   }
 }
