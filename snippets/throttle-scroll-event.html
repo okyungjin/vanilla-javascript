@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Throttle Scroll Event</title>
+  <style>
+    .container {
+      width: 300px;
+      height: 300px;
+      background-color: antiquewhite;
+      overflow: scroll;
+    }
+    .content {
+      width: 300px;
+      height: 1000vh;
+    }
+  </style>
+</head>
+<body>
+  <h1>Throttle Scroll Event</h1>
+  
+  <div class="container">
+    <div class="content"></div>
+  </div>
+  <div>
+    normal event handler가 scroll event를 처리한 횟수
+    <span class="normal-count">0</span>
+  </div>
+  <div>
+    throttle event handler가 scroll event를 처리한 횟수
+    <span class="throttle-count">0</span>
+  </div>
+  <script>
+    const $container = document.querySelector('.container');
+    const $normalCount = document.querySelector('.normal-count');
+    const $throttleCount = document.querySelector('.throttle-count');
+
+    const throttle = (callback, delayOnMilliSecond) => {
+      let timerId;
+      return (event) => {
+        if (timerId) return;
+        timerId = setTimeout(() => {
+          callback(event);
+          timerId = null;
+        }, delayOnMilliSecond, event);
+      }
+    }
+
+    let normalCount = 0;
+    $container.addEventListener('scroll', () => {
+      $normalCount.textContent = ++normalCount;
+    });
+
+    let throttleCount = 0;
+    $container.addEventListener('scroll', throttle(() => {
+      $throttleCount.textContent = ++throttleCount;
+    }, 100));
+  </script>
+</body>
+</html>
