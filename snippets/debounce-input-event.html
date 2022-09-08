@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Debounce Input Event</title>
+</head>
+<body>
+  <h1>Debounce Input Event</h1>
+  <input type="text">
+  <div class="msg"></div>
+  <script>
+    const $input = document.querySelector('input');
+    const $msg = document.querySelector('.msg');
+
+    // debounce 함수는 timerId를 기억하는 클로저를 반환한다.
+    const debounce = (callback, delayOnMilliSecond) => {
+      let timerId;
+      return (event) => {
+        // delay가 경과하기 이전에 이벤트가 발생하면 이전 타이머를 취소하고 새로운 타이머를 설정한다.
+        // delay보다 짧은 간격으로 이벤트가 발생하면 callback은 호출되지 않는다.
+        if (timerId) clearTimeout(timerId);
+        timerId = setTimeout(callback, delayOnMilliSecond, event);
+      }
+    }
+
+    $input.oninput = debounce((event) => {
+      $msg.textContent = event.target.value;
+    }, 300);
+  </script>
+</body>
+</html>
