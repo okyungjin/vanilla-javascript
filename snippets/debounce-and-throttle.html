@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Debound and Throttle</title>
+  </head>
+  <body>
+    <button>Click Me!</button>
+    <pre>
+      Normal Click Event
+      <span class="normal-msg">0</span>
+    </pre>
+    <pre>
+      Debounce Click Event
+      <span class="debounce-msg">0</span>
+    </pre>
+    <pre>
+      Throttle Click Event
+      <span class="throttle-msg">0</span>
+    </pre>
+    <script>
+      const $button = document.querySelector('button');
+      const $normalMsg = document.querySelector('.normal-msg');
+      const $debounceMsg = document.querySelector('.debounce-msg');
+      const $throttleMsg = document.querySelector('.throttle-msg');
+
+      /**
+       * debounce: 연이어 호출되는 함수들 중 마지막 함수(또는 제일 처음 함수)만 호출하게 함
+       * example: 텍스트 입력을 통한 검색
+       */
+      const debounce = (callback, delayOnMilliSecond) => {
+        let timerId;
+        return (event) => {
+          if (timerId) clearTimeout(timerId);
+          timerId = setTimeout(callback, delayOnMilliSecond, event);
+        };
+      };
+
+      /** throttle
+       * 마지막 함수가 호출된 후 일정 시간이 지나기 전에 다시 호출되지 않도록 함
+       * 일정 시간에 한 번 실행되게 제한을 두는 것
+       * example: 스크롤 감지
+       */
+      const throttle = (callback, delayOnMilliSecond) => {
+        let timerId;
+        return (event) => {
+          if (timerId) return;
+          timerId = setTimeout(() => {
+            callback(event);
+            timerId = null;
+          }, delayOnMilliSecond, event);
+        };
+      };
+
+      const incrementNormalCount = () => {
+        $normalMsg.textContent = +$normalMsg.textContent + 1;
+      }
+
+      const incrementDebounceCount = () => {
+        $debounceMsg.textContent = +$debounceMsg.textContent + 1;
+      };
+
+      const incrementThrottleCount = () => { 
+        $throttleMsg.textContent = +$throttleMsg.textContent + 1;
+      };
+
+      $button.addEventListener('click', incrementNormalCount);
+      $button.addEventListener('click', debounce(incrementDebounceCount, 500));
+      $button.addEventListener('click', throttle(incrementThrottleCount, 500));
+    </script>
+  </body>
+</html>
