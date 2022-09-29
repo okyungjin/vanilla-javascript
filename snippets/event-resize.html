@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Event Size</title>
+</head>
+<body>
+  <h1>Resize</h1>
+  <h2>resize your browser!</h2>
+  <script>
+    const handleResizeEvent = () => {
+      document.body.style.background = 'blue';
+      document.body.style.color = 'red';
+    };
+
+    window.addEventListener('resize', handleResizeEvent);
+  </script>
+</body>
+</html>
