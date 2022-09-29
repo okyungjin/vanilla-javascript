@@ -1,0 +1,26 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Event Offline and Online</title>
+</head>
+<body>
+  <h1>Network Check</h1>
+  <script>
+    const handleOnlineEvent = () => {
+      h1.innerHTML = 'Online';
+    };
+
+    const handleOfflineEvent = () => {
+      h1.innerHTML = 'Offline';
+    };
+
+    const h1 = document.querySelector('h1');
+    window.addEventListener('online', handleOnlineEvent);
+    window.addEventListener('offline', handleOfflineEvent);
+  </script>
+</body>
+</html>
