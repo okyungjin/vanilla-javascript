@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Event Right Click</title>
+</head>
+<body>
+  <h1>Right Click</h1>
+  <script>
+    const handleRightClick = (event) => {
+      const isRightClick = event.button === 2;
+      if (isRightClick) {
+        h1.innerText = 'That was a right click!';
+        h1.style.color = 'red';
+      }
+    };
+
+    const h1 = document.querySelector('h1');
+    window.addEventListener('contextmenu', handleRightClick);
+  </script>
+</body>
+</html>
