@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport"
+        content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Random Number Game</title>
+</head>
+<body>
+  <h1>Random Number Game</h1>
+
+  <form id="random-number-form">
+    <div>
+      <label>
+        <b>Generate a number between 0 and </b>
+        <input id="max-range" required type="number" name="range" />
+      </label>
+    </div>
+
+    <div>
+      <label>Guess the number:
+        <input id="guess-number" required type="number" />
+      </label>
+      <input type="submit" value="Play!" />
+    </div>
+  </form>
+
+  <div>
+    <div class="result"></div>
+    <b class="score"></b>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
